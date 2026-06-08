@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>科技法律 期末考題筆記</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --gold: #c9a84c;
+    --gold-light: #f0d080;
+    --cream: #fdf6e3;
+    --red: #c0392b;
+    --teal: #1a6b6b;
+    --teal-light: #e8f4f4;
+    --answer-bg: #f0f7f0;
+    --answer-border: #2e7d32;
+    --explain-bg: #f5f0ff;
+    --explain-border: #6a1b9a;
+    --warn: #7f4f24;
+    --warn-bg: #fef3e2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    padding: 48px 40px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+  header h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2rem;
+    color: #fff;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  header .subtitle {
+    color: var(--gold-light);
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
+  }
+  header .tag-row {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    background: rgba(201,168,76,0.2);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 0.75rem;
+    padding: 3px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* NAV */
+  .nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .nav a {
+    background: var(--ink);
+    color: var(--gold-light);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 6px 16px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+    transition: background 0.2s;
+  }
+  .nav a:hover { background: var(--teal); }
+
+  /* QUESTION CARD */
+  .question-card {
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 44px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    overflow: hidden;
+    border-left: 5px solid var(--gold);
+  }
+
+  .card-header {
+    background: var(--ink);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .q-num {
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .q-title {
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+  .q-topic {
+    margin-left: auto;
+    font-size: 0.72rem;
+    color: var(--gold-light);
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 2px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+
+  .card-body {
+    padding: 24px 28px;
+  }
+
+  /* QUESTION BOX */
+  .question-box {
+    background: var(--warn-bg);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 18px 20px;
+    margin-bottom: 22px;
+    font-size: 0.93rem;
+    line-height: 1.9;
+  }
+  .question-box .scenario {
+    color: #444;
+    margin-bottom: 14px;
+  }
+  .question-box .asks {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .question-box .sub-q {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .sub-q-num {
+    color: var(--red);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ANSWER SECTION */
+  .section {
+    margin-bottom: 20px;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  .label-answer {
+    background: var(--answer-border);
+    color: #fff;
+  }
+  .label-explain {
+    background: var(--explain-border);
+    color: #fff;
+  }
+  .label-compare {
+    background: var(--teal);
+    color: #fff;
+  }
+
+  .answer-block {
+    background: var(--answer-bg);
+    border-left: 3px solid var(--answer-border);
+    border-radius: 0 6px 6px 0;
+    padding: 16px 20px;
+    font-size: 0.91rem;
+    line-height: 1.9;
+    margin-bottom: 12px;
+  }
+  .explain-block {
+    background: var(--explain-bg);
+    border-left: 3px solid var(--explain-border);
+    border-radius: 0 6px 6px 0;
+    padding: 16px 20px;
+    font-size: 0.91rem;
+    line-height: 1.9;
+    margin-bottom: 12px;
+  }
+
+  .sub-answer {
+    margin-bottom: 18px;
+  }
+  .sub-answer-title {
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 8px;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sub-answer-title::before {
+    content: '';
+    display: inline-block;
+    width: 18px; height: 18px;
+    background: var(--teal);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* TABLE */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 12px 0;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    min-width: 580px;
+  }
+  thead tr {
+    background: var(--ink);
+    color: #fff;
+  }
+  thead th {
+    padding: 11px 14px;
+    text-align: left;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  tbody tr:nth-child(even) { background: #f7f9fa; }
+  tbody tr:hover { background: var(--teal-light); }
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #e8e8e8;
+    vertical-align: top;
+    line-height: 1.7;
+  }
+  .stand-no { color: var(--red); font-weight: 700; }
+  .stand-yes { color: var(--answer-border); font-weight: 700; }
+
+  /* KEY POINT */
+  .key-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #fff8e1;
+    border: 1px solid #f0d060;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-size: 0.88rem;
+    line-height: 1.8;
+  }
+  .key-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+
+  /* STEPS */
+  .steps {
+    counter-reset: step;
+    padding-left: 0;
+    list-style: none;
+  }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+    font-size: 0.91rem;
+    line-height: 1.8;
+  }
+  .steps li::before {
+    content: counter(step);
+    background: var(--teal);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.78rem;
+    min-width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* PROS CONS */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 12px;
+  }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+  .col-box {
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 0.88rem;
+    line-height: 1.8;
+  }
+  .col-box h4 {
+    font-size: 0.83rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+  .col-pro { background: #e8f5e9; border-top: 3px solid #2e7d32; }
+  .col-pro h4 { color: #2e7d32; }
+  .col-con { background: #fce4ec; border-top: 3px solid #c62828; }
+  .col-con h4 { color: #c62828; }
+  ul.dot-list { padding-left: 16px; }
+  ul.dot-list li { margin-bottom: 5px; }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 28px 0;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px;
+    color: #888;
+    font-size: 0.8rem;
+    border-top: 1px solid #e0d8c0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>《科技法律》期末考題筆記</h1>
+  <p class="subtitle">考題整理 ｜ 參考答案 ｜ 重點講解</p>
+  <div class="tag-row">
+    <span class="tag">刑法客觀歸責</span>
+    <span class="tag">自動駕駛責任</span>
+    <span class="tag">AI發明人</span>
+    <span class="tag">競爭法</span>
+    <span class="tag">民事強制執行</span>
+    <span class="tag">訴訟外紛爭解決</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="nav">
+    <a href="#q1">Q1 自動駕駛刑責</a>
+    <a href="#q2">Q2 AI發明人</a>
+    <a href="#q3">Q3 競爭法車燈</a>
+    <a href="#q4">Q4 比特幣強制執行</a>
+    <a href="#q5">Q5 訴訟 vs ADR</a>
+  </div>
+
+  <!-- ========== Q1 ========== -->
+  <div class="question-card" id="q1">
+    <div class="card-header">
+      <div class="q-num">1</div>
+      <div class="q-title">Level 3 自動駕駛事故的刑事責任</div>
+      <div class="q-topic">刑法・客觀歸責</div>
+    </div>
+    <div class="card-body">
+
+      <div class="question-box">
+        <div class="scenario">
+          📋 <strong>案例事實：</strong>小明駕駛具備 Level 3 自動駕駛功能的轎車行駛於國道。開啟自駕模式後，依說明書留在駕駛座，但隨即低頭閱讀公文。前方施工車因顏色與路面反射光過近，感測器發生「辨識遺漏」，系統於碰撞前 <strong>2 秒</strong> 才發出「請即刻接管」警訊，小明反應不及，撞死一名工人。鑑定：感測器瑕疵在現行工業標準下屬「<strong>極低機率之殘餘風險</strong>」。
+        </div>
+        <div class="asks">❓ 請問：</div>
+        <div class="sub-q"><span class="sub-q-num">(1)</span><span>製造人責任：感測器辨識遺漏符合現行國家安全標準，製造人是否可主張「容許風險」阻卻不法？</span></div>
+        <div class="sub-q"><span class="sub-q-num">(2)</span><span>使用人責任：小明低頭閱讀公文是否違反注意義務？「僅 2 秒前警示」如何考量結果規避可能性？</span></div>
+      </div>
+
+      <!-- 子題1 -->
+      <div class="sub-answer">
+        <div class="sub-answer-title">製造人責任：客觀歸責與容許風險</div>
+        <div class="section">
+          <div class="section-label label-answer">▸ 核心答案</div>
+          <div class="answer-block">
+            製造人<strong>可主張「容許風險」，但能否阻卻不法仍須個案判斷</strong>，不當然免責。關鍵在於：若感測器確實符合現行國家安全標準，其所帶來的「極低機率殘餘風險」在客觀歸責理論下被視為法律所容許的危險，製造人原則上得據此阻卻不法。然而，若可證明製造人事前已知悉更高安全標準或預見該特定場景的高危性，仍有刑事責任空間。
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label label-explain">▸ 重點講解</div>
+          <div class="explain-block">
+            <strong>① 客觀歸責理論三要件：</strong>
+            <ul class="dot-list" style="margin-top:8px;">
+              <li>行為人製造了法所不容許的風險（製造不被容許之風險）</li>
+              <li>該風險在具體結果中實現（風險實現）</li>
+              <li>結果在構成要件保護範圍內（保護範圍）</li>
+            </ul>
+            <br>
+            <strong>② 容許風險的定義：</strong>現代工業社會不得不容忍某些低度風險（如汽車製造、藥品副作用），若產品符合國家標準，則其殘餘風險屬「被法秩序容忍之風險」，不構成「製造不被容許之風險」，客觀歸責即告不成立。
+            <br><br>
+            <strong>③ 本案考量：</strong>感測器瑕疵被鑑定為現行工業標準下的殘餘風險，表示製造人已盡到現行標準所要求的注意義務。但需進一步檢視：該標準是否已過時、是否有更高安全技術可採用而未採用。若有，則仍有可能構成不被容許之風險。
+          </div>
+        </div>
+        <div class="key-point">
+          <span class="key-icon">💡</span>
+          <span>考試重點：「容許風險」是阻卻客觀歸責的事由，但「符合國家標準」≠「絕對免責」，還要考慮有無更高標準可採。</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- 子題2 -->
+      <div class="sub-answer">
+        <div class="sub-answer-title">使用人責任：注意義務與結果規避可能性</div>
+        <div class="section">
+          <div class="section-label label-answer">▸ 核心答案</div>
+          <div class="answer-block">
+            小明<strong>違反了注意義務</strong>。Level 3 雖允許駕駛「分心」，但說明書明訂須隨時準備接管，低頭閱讀公文使其無法即時回應警示，已逾越自駕系統容許的行為邊界。至於「2 秒警示」：若鑑定認定一般人在 2 秒內無論如何無法反應、接管並制動，則欠缺<strong>結果規避可能性</strong>，即使小明有注意義務違反，因果歸責仍不成立——此點是本案核心爭議。
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label label-explain">▸ 重點講解</div>
+          <div class="explain-block">
+            <strong>① Level 3 的注意義務邊界：</strong>Level 3 為「有條件自動化」，系統在特定條件下自動駕駛，但要求駕駛在收到接管請求時能立即接手。「在駕駛座上但低頭看公文」本身就降低了接管能力，構成注意義務違反。
+            <br><br>
+            <strong>② 結果規避可能性的判斷方式：</strong>
+            <ul class="dot-list" style="margin-top:6px;">
+              <li>假設小明保持正確姿勢（未低頭），在 2 秒內是否能完成「看到警示→判斷→踩煞車→車輛減速→避免死亡」？</li>
+              <li>若人類平均反應時間 + 制動距離超過 2 秒：結果規避不可能 → 欠缺因果歸責，小明無過失犯罪責任</li>
+              <li>若 2 秒勉強可能反應：結果規避可能 → 因果歸責成立，需承擔過失致死責任</li>
+            </ul>
+            <br>
+            <strong>③ 法院審理焦點：</strong>鑑定人將被要求就「2 秒反應時間是否足夠」提出專業意見，這是決定小明是否有罪的關鍵事實問題。
+          </div>
+        </div>
+        <div class="key-point">
+          <span class="key-icon">💡</span>
+          <span>考試重點：過失犯判斷 = 注意義務違反 + 結果規避可能性。兩者缺一不成立。「2 秒警示」是本題的特殊設計，用來測試你是否理解「客觀歸責中的因果連結」。</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== Q2 ========== -->
+  <div class="question-card" id="q2">
+    <div class="card-header">
+      <div class="q-num">2</div>
+      <div class="q-title">DABUS AI 是否可為專利法上的「發明人」？</div>
+      <div class="q-topic">專利法・AI發明人</div>
+    </div>
+    <div class="card-body">
+
+      <div class="question-box">
+        <div class="asks">❓ 請問：</div>
+        <div class="sub-q"><span class="sub-q-num">▸</span><span>比較英國、歐洲、美國、澳洲、南非、台灣在「DABUS AI 能否被承認為發明人」此議題上的立場與理由，並整理正反觀點。</span></div>
+      </div>
+
+      <div class="section">
+        <div class="section-label label-compare">▸ 各國立場比較表</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>國家／地區</th>
+                <th>法律立場</th>
+                <th>核心理由</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>歐洲 (EPO)</strong></td>
+                <td class="stand-no">❌ 不承認</td>
+                <td>EPC 明定發明人須為「自然人」；AI 不具法律人格，無法行使發明人權利。</td>
+              </tr>
+              <tr>
+                <td><strong>英國 (UK)</strong></td>
+                <td class="stand-no">❌ 不承認</td>
+                <td>專利法要求發明人須為「person」（自然人）；2023 年最高法院確認 DABUS 案敗訴，AI 不符資格。</td>
+              </tr>
+              <tr>
+                <td><strong>美國 (US)</strong></td>
+                <td class="stand-no">❌ 不承認</td>
+                <td>35 U.S.C. § 100 規定發明人為「individual」，USPTO 及法院（Thaler v. Vidal）均裁定必須為自然人。</td>
+              </tr>
+              <tr>
+                <td><strong>台灣 (TIPO)</strong></td>
+                <td class="stand-no">❌ 不承認</td>
+                <td>專利法第 5 條規定專利申請權人以自然人、法人為限，AI 目前無法律地位，不得列為發明人。</td>
+              </tr>
+              <tr>
+                <td><strong>澳洲 (AU)</strong></td>
+                <td><span style="color:#c0850a;font-weight:700;">⚖️ 曾承認後逆轉</span></td>
+                <td>2021 年聯邦法院初判支持 AI 可為發明人，但 2022 年全院庭（Full Federal Court）推翻，回歸「自然人」要件。</td>
+              </tr>
+              <tr>
+                <td><strong>南非 (ZA)</strong></td>
+                <td class="stand-yes">✅ 承認（程序上）</td>
+                <td>南非專利局未做實質審查即核准 DABUS 為發明人，屬行政程序產物，不代表法院立場，實際法律效力存疑。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section" style="margin-top:20px;">
+        <div class="section-label label-explain">▸ 正反觀點總結</div>
+        <div class="two-col">
+          <div class="col-box col-con">
+            <h4>❌ 反對承認 AI 為發明人</h4>
+            <ul class="dot-list">
+              <li>現行專利法以「自然人」為核心，AI 不具法律人格</li>
+              <li>發明人概念預設有「創作意圖」與「智識貢獻」，AI 無主觀意圖</li>
+              <li>若 AI 為發明人，專利權歸屬難以確定（AI 本身不能持有財產）</li>
+              <li>開放 AI 為發明人可能導致海量專利申請、阻礙競爭</li>
+            </ul>
+          </div>
+          <div class="col-box col-pro">
+            <h4>✅ 支持承認或修法討論</h4>
+            <ul class="dot-list">
+              <li>AI 已能獨立產生具新穎性的發明，忽視此事實阻礙創新保護</li>
+              <li>現行法律解釋若過度僵化，無法因應科技發展</li>
+              <li>可參考法人享有部分法律資格的邏輯，設計「AI 輔助發明」新類別</li>
+              <li>若 AI 發明不受保護，相關投資誘因減少，不利技術發展</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="key-point">
+        <span class="key-icon">💡</span>
+        <span>考試重點：背各國立場 + 背後法條邏輯。南非案例常被誤解為「承認」，要注意它只是行政程序核准，不代表實質法律效力。</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== Q3 ========== -->
+  <div class="question-card" id="q3">
+    <div class="card-header">
+      <div class="q-num">3</div>
+      <div class="q-title">賓士 vs 帝寶：汽車與車燈的競爭法相關市場</div>
+      <div class="q-topic">競爭法・主後市場</div>
+    </div>
+    <div class="card-body">
+
+      <div class="question-box">
+        <div class="asks">❓ 請問：</div>
+        <div class="sub-q"><span class="sub-q-num">(1)</span><span>在歐盟競爭法下，如何判斷「汽車」與「車燈」是否屬於同一相關市場？主－後市場界定原則為何？</span></div>
+        <div class="sub-q"><span class="sub-q-num">(2)</span><span>若單純不授權副廠生產，是否當然違法？（參考歐盟 Volvo 案）</span></div>
+      </div>
+
+      <div class="sub-answer">
+        <div class="sub-answer-title">相關市場界定：主市場 vs. 後市場</div>
+        <div class="section">
+          <div class="section-label label-answer">▸ 核心答案</div>
+          <div class="answer-block">
+            在歐盟競爭法框架下，「汽車」（主市場）與「車燈零件」（後市場／售後市場）<strong>被界定為兩個獨立的相關商品市場</strong>，而非同一市場。
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label label-explain">▸ 主後市場界定判斷原則</div>
+          <div class="explain-block">
+            <strong>① 需求替代性（SSNIP Test）：</strong>若汽車漲價，消費者不會去買更多車燈（兩者功能不同、不可替代），故非同一市場。
+            <br><br>
+            <strong>② 鎖定效應（Lock-in Effect）：</strong>車主一旦購入特定品牌汽車，在維修時只能使用相容零件（車燈），此「鎖定」使零件市場具有高度市場力量，需獨立評估。
+            <br><br>
+            <strong>③ 跨期替代考量：</strong>歐盟委員會指出，若消費者在購車時已將未來維修成本納入考量，則主後市場可視為同一；但若資訊不對稱（消費者難以預測維修成本），仍應分立界定。
+            <br><br>
+            <strong>④ 本案結論：</strong>設計專利保護的車燈（外觀形狀唯一適配該車型），副廠無法合法生產，形成後市場壟斷。
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="sub-answer">
+        <div class="sub-answer-title">拒絕授權是否當然違法？（Volvo 案原則）</div>
+        <div class="section">
+          <div class="section-label label-answer">▸ 核心答案</div>
+          <div class="answer-block">
+            <strong>單純拒絕授權本身不當然違法。</strong>智慧財產權人有權行使排他性，拒絕授權是正當權利行使。但若存在「特殊環境」（exceptional circumstances），拒絕授權可能構成濫用市場支配地位（TFEU 第 102 條）。
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label label-explain">▸ Volvo 案「特殊環境」三要件</div>
+          <div class="explain-block">
+            歐洲法院在 Volvo v. Veng（1988）案確立：當同時滿足以下條件，拒絕授權才可能違法——
+            <ul class="dot-list" style="margin-top:8px;">
+              <li><strong>市場支配地位：</strong>權利人在相關市場（售後零件市場）具有支配地位</li>
+              <li><strong>拒絕授權導致競爭消滅：</strong>拒絕授權使得相鄰市場的競爭完全被排除</li>
+              <li><strong>無客觀正當理由：</strong>無技術、安全或其他合理事由可正當化拒絕行為</li>
+            </ul>
+            <br>
+            此外，歐洲法院在 Magill 案及 IMS Health 案進一步補充：拒絕可能構成違法的情況包括阻礙新產品進入市場、純粹為排除競爭而非基於商業合理性。
+          </div>
+        </div>
+        <div class="key-point">
+          <span class="key-icon">💡</span>
+          <span>考試重點：「不授權 ≠ 當然違法」是核心命題。記住 Volvo 案三要件，並能用帝寶案事實套用分析。</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== Q4 ========== -->
+  <div class="question-card" id="q4">
+    <div class="card-header">
+      <div class="q-num">4</div>
+      <div class="q-title">比特幣民事強制執行的步驟與流程</div>
+      <div class="q-topic">民事程序法・數位資產</div>
+    </div>
+    <div class="card-body">
+
+      <div class="question-box">
+        <div class="asks">❓ 請問：</div>
+        <div class="sub-q"><span class="sub-q-num">▸</span><span>以「比特幣民事強制執行」為例，說明民事強制執行的步驟和流程內容。</span></div>
+      </div>
+
+      <div class="section">
+        <div class="section-label label-answer">▸ 核心答案：強制執行流程</div>
+        <ol class="steps">
+          <li><strong>取得執行名義：</strong>債權人須先取得確定判決、支付命令或調解筆錄等執行名義（強制執行法 § 4）。</li>
+          <li><strong>聲請強制執行：</strong>向管轄法院民事執行處聲請，並陳報債務人持有比特幣的資訊（如交易所帳戶、錢包地址）。</li>
+          <li><strong>查扣措施：</strong>
+            <ul class="dot-list" style="margin-top:6px; margin-left:16px;">
+              <li>若存於<strong>中心化交易所</strong>（如幣安）：法院發函命交易所禁止債務人提領、轉移，並揭露帳戶餘額。</li>
+              <li>若存於<strong>自管錢包</strong>（私鑰自持）：法院命債務人交付私鑰或移轉至法院指定地址；若拒絕，可命其履行（間接強制）。</li>
+            </ul>
+          </li>
+          <li><strong>鑑價與換算：</strong>執行時比特幣須換算為新台幣，以執行當日市價為準（需選擇具公信力的報價來源）。</li>
+          <li><strong>拍賣或變賣：</strong>法院得拍賣或命債務人於特定時間內於交易所賣出，所得扣除費用後分配予債權人。</li>
+          <li><strong>移轉或分配：</strong>將換算所得金額依分配表分配給各債權人。</li>
+        </ol>
+      </div>
+
+      <div class="section" style="margin-top:18px;">
+        <div class="section-label label-explain">▸ 重點挑戰與法律爭議</div>
+        <div class="explain-block">
+          <strong>① 識別困難：</strong>比特幣採假名機制，難以確認債務人持有量，尤其自管錢包無法直接查扣。<br><br>
+          <strong>② 法律定性：</strong>台灣目前法院傾向將比特幣視為「財產」（類似動產或無形財產），得為強制執行客體，但尚無明文規定。<br><br>
+          <strong>③ 價格波動風險：</strong>強制執行期間比特幣價格可能劇烈波動，影響債權實現金額。<br><br>
+          <strong>④ 跨境問題：</strong>若交易所設於境外，法院發函效力及執行方式更加複雜。
+        </div>
+      </div>
+
+      <div class="key-point">
+        <span class="key-icon">💡</span>
+        <span>考試重點：流程六步驟要熟記。「中心化交易所 vs. 自管錢包」的處理差異是最常出的考點。</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== Q5 ========== -->
+  <div class="question-card" id="q5">
+    <div class="card-header">
+      <div class="q-num">5</div>
+      <div class="q-title">傳統訴訟 vs. 訴訟外紛爭解決機制（ADR）比較</div>
+      <div class="q-topic">民事程序法・ADR</div>
+    </div>
+    <div class="card-body">
+
+      <div class="question-box">
+        <div class="asks">❓ 請問（PPT 第 18 頁比較表整理）：</div>
+        <div class="sub-q"><span class="sub-q-num">▸</span><span>比較傳統訴訟（Litigation）與訴訟外紛爭解決機制（ADR）在各面向的差異。</span></div>
+      </div>
+
+      <div class="section">
+        <div class="section-label label-compare">▸ 比較表</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>比較面向</th>
+                <th>傳統訴訟（Litigation）</th>
+                <th>ADR（仲裁／調解／和解）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>主導者與裁判者</strong></td>
+                <td>法院（國家公權力）；法官裁判，當事人無選擇權</td>
+                <td>由當事人合意選擇仲裁人或調解人；具備當事人自治</td>
+              </tr>
+              <tr>
+                <td><strong>程序公開性</strong></td>
+                <td>原則公開審理（憲法要求）</td>
+                <td>原則保密（適合保護商業機密或隱私）</td>
+              </tr>
+              <tr>
+                <td><strong>程序時間</strong></td>
+                <td>較長（一審→二審→三審可能歷時數年）</td>
+                <td>較短（調解可能數週至數月，仲裁亦較快）</td>
+              </tr>
+              <tr>
+                <td><strong>耗費成本</strong></td>
+                <td>律師費、訴訟費，長期訴訟成本高</td>
+                <td>初期費用可能較高（仲裁費），但整體成本常低於訴訟</td>
+              </tr>
+              <tr>
+                <td><strong>結果性質</strong></td>
+                <td>勝敗二元（零和結果）</td>
+                <td>調解可達雙贏方案；仲裁結果類似判決</td>
+              </tr>
+              <tr>
+                <td><strong>法律效力</strong></td>
+                <td>確定判決具既判力，可強制執行</td>
+                <td>仲裁判斷具強制執行力；調解書經法院核定亦具效力</td>
+              </tr>
+              <tr>
+                <td><strong>適用場景</strong></td>
+                <td>刑事案件（ADR 不適用）、需確立法律原則之案件、一方拒絕配合</td>
+                <td>商業糾紛、智財爭議（不涉公益）、跨國仲裁（紐約公約）、當事人希望維繫關係</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="key-point">
+        <span class="key-icon">💡</span>
+        <span>考試重點：「仲裁判斷的強制執行力」（透過紐約公約跨國承認）是科技法律常考的國際面向。「保密性」是 ADR 相較訴訟最大優勢，尤其適合科技公司保護商業秘密。</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  科技法律 期末複習筆記 ｜ 整理自課堂考題投影片第 10–18 頁
+</footer>
+
+</body>
+</html>
